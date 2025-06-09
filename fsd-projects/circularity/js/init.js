@@ -97,7 +97,7 @@ var init = function (window) {
 
             }
             if (circle.y < 0){ //checks if the circle has gone past the Bottom side of the screen
-                circle.y > canvas.height;
+                circle.y = canvas.height;
             }
 
             
