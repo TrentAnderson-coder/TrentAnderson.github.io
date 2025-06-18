@@ -14,7 +14,7 @@ var runLevels = function (window) {
     var levelData = window.opspark.levelData;
 
     // set this to true or false depending on if you want to see hitzones
-    game.setDebugMode(true);
+    game.setDebugMode(false);
 
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
@@ -35,17 +35,18 @@ var runLevels = function (window) {
 
     }
 
-    function createEnemy(x, y, speed){
+    function createEnemy(x, y, speed, image, offsetX, offsetY, scale){
       var enemy = game.createGameItem("enemy", 25);
-      var redSquare = draw.rect(50, 50, "red");
-      redSquare.x = -25;
-      redSquare.y = -25;
+      var redSquare = draw.bitmap(image);
+      redSquare.scaleX = scale;
+      redSquare.scaleY = scale;
+      redSquare.x = offsetX;
+      redSquare.y = -offsetY;
       enemy.addChild(redSquare);
       enemy.x = x;
       enemy.y = y;
       game.addGameItem(enemy);
       enemy.velocityX = -speed;
-      enemy.rotationalVelocity = 30;
       enemy.onPlayerCollision = function () {
         game.changeIntegrity(-20)
       };
@@ -97,15 +98,11 @@ var runLevels = function (window) {
 
 
     //calls
-    createSawBlade(400, groundY - 365, 10);
-    createSawBlade(600, groundY - 365, 15);
-    createSawBlade(800, groundY - 365, 20);
-    createEnemy(1000, groundY - 50, 3);
-    createEnemy(900, groundY - 50, 5);
-    createEnemy(800, groundY - 50, 6);
-    createEnemy(700, groundY - 50, 11);
-    createReward(1200, groundY - 10, 3);
-    createMarker(1600, groundY - 50, 3)
+    
+    
+    
+    
+    
 
 
 
@@ -113,6 +110,29 @@ var runLevels = function (window) {
 
     function startLevel() {
       // TODO 13 goes below here
+      var level = levelData [currentLevel] //fetches the current level of the array and stores it in the level var
+      var levelObjects = level.gameItems;
+      for(var i = 0; i < levelObjects.length; i++){
+        var element = levelObjects[i];
+
+        if(element.type === "sawblade"){
+          createSawBlade(element.x, element.y, element.damage);
+        }
+
+        if(element.type === "enemy"){
+          createEnemy(element.x, element.y, element.speed, element.image, element.offsetX, element.offsetY, element.scale);
+        }
+
+        if(element.type === "reward"){
+          createReward(element.x, element.y, element.speed);
+        }
+
+        if(element.type === "marker"){
+          createMarker(element.x, element.y, element.speed);
+
+
+        }
+      }
 
 
 
