@@ -60,6 +60,7 @@ var makeLevelData = function (window) {
           { type: "enemy", x: 3500, y: groundY - 70, speed: 6, image: "img/OIP.png", offsetX: -25, offsetY: -25, scale: 0.4},
           { type: "enemy", x: 3600, y: groundY - 70, speed: 11, image: "img/ufo.png", offsetX: -25, offsetY: -25, scale: 0.4},
           { type: "reward", x: 3700, y: groundY - 10, speed: 4, image: "img/blue gem.png", offsetX: -25, offsetY: -25, scale: 0.8},
+          { type: "marker", x: 4000, y: groundY - 50, speed: 3, image: "img/yellow gem.png", offsetX: -25, offsetY: -25, scale: 0.8},
         ],
       },
     ];
