@@ -14,7 +14,7 @@ var runLevels = function (window) {
     var levelData = window.opspark.levelData;
 
     // set this to true or false depending on if you want to see hitzones
-    game.setDebugMode(false);
+    game.setDebugMode(true);
 
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
@@ -41,7 +41,7 @@ var runLevels = function (window) {
       redSquare.scaleX = scale;
       redSquare.scaleY = scale;
       redSquare.x = offsetX;
-      redSquare.y = -offsetY;
+      redSquare.y = offsetY;
       enemy.addChild(redSquare);
       enemy.x = x;
       enemy.y = y;
@@ -56,17 +56,18 @@ var runLevels = function (window) {
 
       }
     }
-    function createReward(x, y, speed){
+    function createReward(x, y, speed, image, offsetX, offsetY, scale){
       var reward = game.createGameItem("reward", 25);
-      var blueSquare = draw.rect(50, 50, "blue");
-      blueSquare.x = -25;
-      blueSquare.y = -25;
+      var blueSquare = draw.bitmap(image);
+      blueSquare.x = offsetX;
+      blueSquare.y = offsetY;
+      blueSquare.scaleX = scale;
+      blueSquare.scaleY = scale;
       reward.addChild(blueSquare);
       reward.x = x;
       reward.y = y;
       game.addGameItem(reward);
       reward.velocityX = -speed;
-      reward.rotationalVelocity = 30;
       reward.onPlayerCollision = function () {
         game.changeIntegrity(20)
         game.increaseScore(100);
@@ -74,17 +75,18 @@ var runLevels = function (window) {
       };
       
     }
-    function createMarker(x, y, speed){
+    function createMarker(x, y, speed, image, offsetX, offsetY, scale){
       var marker = game.createGameItem("marker", 25);
-      var yellowSquare = draw.rect(50, 50, "yellow");
-      yellowSquare.x = -25;
-      yellowSquare.y = -25;
+      var yellowSquare = draw.bitmap(image);
+      yellowSquare.x = offsetX;
+      yellowSquare.y = offsetY;
+      yellowSquare.scaleX = scale;
+      yellowSquare.scaleY = scale;
       marker.addChild(yellowSquare);
       marker.x = x;
       marker.y = y;
       game.addGameItem(marker);
       marker.velocityX = -speed;
-      marker.rotationalVelocity = 30;
       marker.onPlayerCollision = function () {
         game.changeIntegrity(50)
         game.increaseScore(100);
@@ -124,11 +126,11 @@ var runLevels = function (window) {
         }
 
         if(element.type === "reward"){
-          createReward(element.x, element.y, element.speed);
+          createReward(element.x, element.y, element.speed, element.image, element.offsetX, element.offsetY, element.scale);
         }
 
         if(element.type === "marker"){
-          createMarker(element.x, element.y, element.speed);
+          createMarker(element.x, element.y, element.speed, element.image, element.offsetX, element.offsetY, element.scale);
 
 
         }
